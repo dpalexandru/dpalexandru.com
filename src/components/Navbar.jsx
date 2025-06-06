@@ -10,7 +10,7 @@ import {
 } from '@heroicons/react/24/solid';
 
 const Navbar = () => {
-  const initialText = "I  am a web developer";
+  const initialText = "I  am a web developer ";
   const finalText = "dpalexandru.com";
   const [displayedText, setDisplayedText] = useState("");
   const [isFinal, setIsFinal] = useState(false);
