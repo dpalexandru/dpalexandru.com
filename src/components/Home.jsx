@@ -29,7 +29,7 @@ const Home = () => {
             Explore my journey in the world of technology and beyond!
           </p>
 
-          {/* Timeline Professionale */}
+          {/* Timeline cv */}
           <section>
             <h2 className="text-2xl font-bold mb-8 text-slate-100">My Professional Journey</h2>
             <ol className="relative border-l-2 border-slate-600">
