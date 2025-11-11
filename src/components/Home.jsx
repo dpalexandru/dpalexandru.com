@@ -15,7 +15,7 @@ const Home = () => {
       <div className="absolute inset-0 bg-slate-700" />
 
       {/* layer sfocato a destra: gradiente da nero trasparente a nero */}
-      <div className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-black to-transparent filter blur-lg" />
+      <div className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-gray-800 to-transparent filter blur-lg" />
 
       {/* contenuto vero e proprio */}
       <div className="relative z-10">
