@@ -1,4 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { TextPlugin } from "gsap/TextPlugin";
+gsap.registerPlugin(TextPlugin);
 import {
   ArrowDownTrayIcon,
   ArrowsPointingOutIcon,
@@ -12,6 +15,35 @@ const CV_URL = "/Alexandru-Dessanai-CV-2025.pdf";
 export default function CVPage() {
   const [fullscreen, setFullscreen] = useState(false);
   const closeBtnRef = useRef(null);
+  const textFull = "Visualizza, scarica o stampa il mio CV. File PDF sempre aggiornato.";
+  const descRef = useRef(null);
+  const cursorRef = useRef(null);
+
+  // use effect scritta animata 
+  useLayoutEffect(() => {
+    // stato iniziale
+    gsap.set(descRef.current, { text: "" });
+    gsap.set(cursorRef.current, { autoAlpha: 1 });
+
+    const tl = gsap.timeline();
+    tl.to(descRef.current, {
+      duration: 2.2,           // velocità “digitazione”
+      text: textFull,
+      ease: "none",            // typing lineare
+    })
+      // cursore che lampeggia durante la digitazione
+      .to(cursorRef.current, {
+        autoAlpha: 0,
+        duration: 0.6,
+        repeat: -1,
+        yoyo: true,
+        ease: "none",
+      }, 0)
+      // alla fine, fermo il lampeggio e nascondo il cursore
+      .to(cursorRef.current, { autoAlpha: 0 }, ">");
+
+    return () => tl.kill();
+  }, []);
 
   // Chiudi con ESC nel fullscreen
   useEffect(() => {
@@ -37,7 +69,8 @@ export default function CVPage() {
           Curriculum Vitae
         </h1>
         <p className="text-slate-300 mb-8">
-          Visualizza, scarica o stampa il mio CV. File PDF sempre aggiornato.
+          <span ref={descRef} />
+          <span ref={cursorRef} className="inline-block ml-1">|</span>
         </p>
 
         {/* Barra azioni */}
